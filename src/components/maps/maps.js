@@ -70,7 +70,7 @@ export class MapContainer extends Component {
         });
 
         function getColor(index) {
-            var colors = ["#00ffff", "#f0ffff", "#f5f5dc", "#000000", "#0000ff"];
+            var colors = ["#00ffff", "#ffa500", "#ff00ff", "#ff0000", "#800080"];
             return colors[index];
         }
 
@@ -102,7 +102,7 @@ export class MapContainer extends Component {
                 {clusterPoints.map((point, index) => 
                     <Marker 
                         onClick={this.onMarkerClick}
-                        name={'Humidity : '  + clusterInfo[index].humidity + ', Temperature : ' + clusterInfo[index].temperature }
+                        name={'Group : ' + clusterInfo[index].group + ', Humidity : '  + clusterInfo[index].humidity + ', Temperature : ' + clusterInfo[index].temperature }
                         position={point} />)}
 
                 
