@@ -21,8 +21,8 @@ const points = [
 
 var logBook = [];
 var cluster = [];
-
-
+var clusterPoints = [];
+var clusterInfo = [];
 
 export class MapContainer extends Component {
     state = {
@@ -52,8 +52,28 @@ export class MapContainer extends Component {
         cluster = this.props.dataCluster;
         logBook = this.props.logBook;
 
-        console.log('logBook Maps ', this.props.dataCluster);
-        console.log('cluster Maps ', this.props.logBook);
+        console.log('cluster Maps ', cluster);
+        console.log('logBook Maps ', logBook);
+        console.log('points Maps ', points);
+
+        cluster.forEach( function(cl, i) {
+            cl.cluster.forEach( function(point, j) {
+                clusterPoints.push({
+                    lat: point[3], lng: point[2]
+                });
+                clusterInfo.push({
+                    group: i,
+                    temperature: point[0],
+                    humidity: point[1]
+                });
+            });
+        });
+
+        function getColor(index) {
+            var colors = ["#00ffff", "#f0ffff", "#f5f5dc", "#000000", "#0000ff"];
+            return colors[index];
+        }
+
 
         return (
         <>
@@ -65,7 +85,7 @@ export class MapContainer extends Component {
                 onClick={this.onMapClicked}
                 >
 
-                {points.map((point) => 
+                {clusterPoints.map((point, index) => 
                     <Circle
                     radius={1200}
                     center={point}
@@ -75,14 +95,14 @@ export class MapContainer extends Component {
                     strokeColor='transparent'
                     strokeOpacity={0}
                     strokeWeight={5}
-                    fillColor='#ffffff'
+                    fillColor={getColor(clusterInfo[index].group)}
                     fillOpacity={0.2}
                 />)}
 
-                {points.map((point) => 
+                {clusterPoints.map((point, index) => 
                     <Marker 
                         onClick={this.onMarkerClick}
-                        name={'Current location '  + point.lat + ', ' + point.lng}
+                        name={'Humidity : '  + clusterInfo[index].humidity + ', Temperature : ' + clusterInfo[index].temperature }
                         position={point} />)}
 
                 

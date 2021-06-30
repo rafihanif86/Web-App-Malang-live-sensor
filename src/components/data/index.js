@@ -9,8 +9,8 @@ export default function Data() {
     const [todoList, setTodoList] = useState();
     const [loading, setLoading] = useState(true);
     const userList = [];
-    const logBook = [];
-    var clusterData = [];
+    const [logBook, setLogBook] = useState([]);
+    const [clusterData, setClusterData] = useState([]);
     let vectors = new Array();
     var printMaps = '';
 
@@ -31,7 +31,7 @@ export default function Data() {
           console.error(err);
         }else{
           // console.log('%o',res);
-          clusterData = res;
+          setClusterData(res);
         } 
         console.log("cluster ", clusterData);
         setLoading(false);
@@ -91,8 +91,7 @@ export default function Data() {
     if(loading){
       mapsAdd = <h1> Loading For Maps.. </h1>;
     }else{
-
-      mapsAdd = <Maps dataCluster={clusterData} logBook={logBook} key={Math.random()}/>;
+      mapsAdd = <Maps dataCluster={clusterData} logBook={logBook} key={'1'}/>;
     }
 
   return (
