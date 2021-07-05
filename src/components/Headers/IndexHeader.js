@@ -21,7 +21,7 @@ function IndexHeader(props) {
         <div className="content-center">
           <Container>
             <div className="title-brand">
-              <h1 className="presentation-title">Paper Kit React</h1>
+              <h1 className="presentation-title">Malang Live Sensors</h1>
               <div className="fog-low">
                 <img
                   alt="..."
@@ -36,7 +36,7 @@ function IndexHeader(props) {
               </div>
             </div>
             <h2 className="presentation-subtitle text-center">
-              Make your mark with a Free Bootstrap 4 (Reactstrap) UI Kit! {props.popupProps}
+              Pantau Kelembaban dan suhu Kota Malang secara <i>RealTime</i> 
             </h2>
           </Container>
         </div>
@@ -48,8 +48,8 @@ function IndexHeader(props) {
           }}
         />
         <h6 className="category category-absolute">
-          Designed and coded by{" "}
-          <a
+          Created by Rafi Hanif Rahmadhani
+          {/* <a
             href="https://www.creative-tim.com?ref=pkr-index-page"
             target="_blank"
           >
@@ -58,7 +58,7 @@ function IndexHeader(props) {
               className="creative-tim-logo"
               src={require("assets/img/creative-tim-white-slim2.png").default}
             />
-          </a>
+          </a> */}
         </h6>
       </div>
     </>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import firebase from '../../config/firebase';
 import { Table, Container } from 'reactstrap';
 import Row from './row';
-import Maps from '../maps/maps';
+import Maps from '../maps';
 
 export default function Data() {
   
@@ -24,6 +24,7 @@ export default function Data() {
       for (let i = 0 ; i < logBook.length ; i++) {
         vectors[i] = [ logBook[i]['temperature'] , logBook[i]['humidity'], logBook[i]['latitude'], logBook[i]['longitude']];
       }
+
       
       const kmeans = require('node-kmeans');
       kmeans.clusterize(vectors, {k: cluster}, (err,res) => {
@@ -96,8 +97,15 @@ export default function Data() {
 
   return (
     <div>
+      <div>
+        <hr/>
+        <center><h2><i>Realtime sensors</i> dengan K-Means <i>Clustering Algorithm</i></h2></center>
+        <hr/>
+      </div>
       {mapsAdd}
-      <Container>
+      <div style={{ minHeight: "800px"}}></div>
+      
+      {/* <Container>
         <h2>Data Logbook</h2>
         <Table>
           <thead>
@@ -115,7 +123,7 @@ export default function Data() {
               {todoList ? todoList.map((todo, index) => <Row todo={todo} key={index} />) : <h3> Loading Data.. </h3>} 
           </tbody>
         </Table>
-      </Container>
+      </Container> */}
     </div>
   );
 }

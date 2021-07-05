@@ -71,7 +71,7 @@ function IndexNavbar() {
             target=""
             title="Coded by Creative Tim"
           >
-            Malang Live Sensor
+            Malang Live Sensors
           </NavbarBrand>
           <button
             aria-expanded={navbarCollapse}
@@ -143,7 +143,7 @@ function IndexNavbar() {
                 <i className="nc-icon nc-book-bookmark" /> Documentation
               </NavLink>
             </NavItem> */}
-            <NavItem>
+            {/* <NavItem>
               <Button
                 className="btn-round"
                 color="success"
@@ -152,7 +152,7 @@ function IndexNavbar() {
               >
                 <i className="nc-icon nc-circle-10"></i> Login
               </Button>
-            </NavItem>
+            </NavItem> */}
           </Nav>
         </Collapse>
       </Container>
