@@ -4,20 +4,18 @@ import { Map, InfoWindow, Marker, Circle, GoogleApiWrapper } from 'google-maps-r
 const mapStyles = {
     width: '100%',
     height: '100%',
-    
   };
 
   
 const coords = { lat: -7.9569336, lng: 112.6321853 };
 
-
-const points = [
-    { lat: -7.9446076, lng: 112.615169 },
-    { lat: -7.934909, lng: 112.606117 },
-    { lat: -7.943147, lng: 112.591316 },
-    { lat: -7.96457, lng: 112.610756 },
-    { lat: -7.98617, lng: 112.610535 }
-];
+// const points = [
+//     { lat: -7.9446076, lng: 112.615169 },
+//     { lat: -7.934909, lng: 112.606117 },
+//     { lat: -7.943147, lng: 112.591316 },
+//     { lat: -7.96457, lng: 112.610756 },
+//     { lat: -7.98617, lng: 112.610535 }
+// ];
 
 var logBook = [];
 var cluster = [];
@@ -66,7 +64,6 @@ export class MapContainer extends Component {
         console.log('clusterPoints Maps ', clusterPoints);
 
         cluster.forEach( function(cl, i) {
-            console.log('cluster print ', cl.cluster.length)
             centeroidPoint.push({
                 lat: cl.centroid[3], lng: cl.centroid[2]
             });
@@ -113,9 +110,9 @@ export class MapContainer extends Component {
                     <Circle
                     radius={1000}
                     center={point}
-                    onMouseover={() => console.log('mouseover')}
-                    onClick={() => console.log('click')}
-                    onMouseout={() => console.log('mouseout')}
+                    // onMouseover={() => console.log('mouseover')}
+                    // onClick={() => console.log('click')}
+                    // onMouseout={() => console.log('mouseout')}
                     strokeColor='transparent'
                     strokeOpacity={0}
                     strokeWeight={5}
@@ -133,9 +130,9 @@ export class MapContainer extends Component {
                     <Circle
                     radius={getRadius(centeroidInfo[index].marker)}
                     center={point}
-                    onMouseover={() => console.log('mouseover')}
-                    onClick={() => console.log('click')}
-                    onMouseout={() => console.log('mouseout')}
+                    // onMouseover={() => console.log('mouseover')}
+                    // onClick={() => console.log('click')}
+                    // onMouseout={() => console.log('mouseout')}
                     strokeColor='transparent'
                     strokeOpacity={0}
                     strokeWeight={5}

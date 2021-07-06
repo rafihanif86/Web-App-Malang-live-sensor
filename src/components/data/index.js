@@ -3,6 +3,7 @@ import firebase from '../../config/firebase';
 import { Table, Container } from 'reactstrap';
 import Row from './row';
 import Maps from '../maps';
+import kmeans from './kmeans';
 
 export default function Data() {
   
@@ -12,8 +13,6 @@ export default function Data() {
     const [logBook, setLogBook] = useState([]);
     const [clusterData, setClusterData] = useState([]);
     let vectors = new Array();
-    var printMaps = '';
-
     var mapsAdd = '';
     
     const todoRef = firebase.database().ref('Log');
@@ -34,10 +33,25 @@ export default function Data() {
           // console.log('%o',res);
           setClusterData(res);
         } 
-        console.log("cluster ", clusterData);
+        // console.log("cluster ", clusterData);
         setLoading(false);
       });
     }
+
+    //fungsi clustering menggunakan kmeans.js
+    function clusterKmeans(sumCluster){
+      let rawData = new Array();
+
+      for (let i = 0 ; i < logBook.length ; i++) {
+        rawData[i] = [ logBook[i]['temperature'] , logBook[i]['humidity'], logBook[i]['latitude'], logBook[i]['longitude']];
+      }
+
+      var tmp = kmeans(sumCluster, rawData);
+      // console.log('tmp ', tmp);
+      setClusterData(tmp);
+      setLoading(false);
+    }
+
 
     function getDataFb(){
       todoRef.on('value', (snapshot) => {
@@ -67,23 +81,19 @@ export default function Data() {
             }
           });
           // console.log("logUser ", logUser);
-          logBook.push(logUser[logUser.length-1]);
-
-          
+          logBook.push(logUser[logUser.length-1]);          
         });
 
-        //memanggil fungsi clustering
-        clustering(2);
+        //memanggil fungsi clustering kmeans.js
+        clusterKmeans(2);
 
-        console.log("list of user ", userList);
-      
+        //memanggil fungsi clustering node-kmeans
+        // clustering(2);
+
+        // console.log("list of user ", userList);
         console.log("list of Logbook ", logBook);
       });
-
-      
     }
-
-    
 
     useEffect(() => {
       getDataFb();
