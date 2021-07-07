@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "npm run build && firebase deploy",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
@@ -83,5 +83,5 @@
   "bugs": {
     "url": "https://github.com/creativetimofficial/paper-kit-react/issues"
   },
-  "homepage": "https://demos.creative-tim.com/paper-kit-react/#/index"
+  "homepage": "https://rafihanif86.github.io/Web-App-Malang-live-sensor/"
 }
