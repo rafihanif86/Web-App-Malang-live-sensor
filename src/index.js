@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import firebase from './config/firebase';
-import { store } from './config/redux';
+// import { store } from './config/redux';
 
 // styles
 import "bootstrap/scss/bootstrap.scss";

@@ -1,46 +1,45 @@
 import React, { useState, useEffect } from 'react';
 import firebase from '../../config/firebase';
-import { Table, Container } from 'reactstrap';
-import Row from './row';
+// import { Table, Container } from 'reactstrap';
+// import Row from './row';
 import Maps from '../maps';
 import kmeans from './kmeans';
 
 export default function Data() {
   
-    const [todoList, setTodoList] = useState();
+    var [todoList, setTodoList] = useState();
     const [loading, setLoading] = useState(true);
     const userList = [];
     const [logBook, setLogBook] = useState([]);
     const [clusterData, setClusterData] = useState([]);
-    let vectors = new Array();
     var mapsAdd = '';
     
     const todoRef = firebase.database().ref('Log');
 
     //fungsi clustering menggunakan node-kmeans
-    function clustering(cluster){
-      vectors = new Array();
-      for (let i = 0 ; i < logBook.length ; i++) {
-        vectors[i] = [ logBook[i]['temperature'] , logBook[i]['humidity'], logBook[i]['latitude'], logBook[i]['longitude']];
-      }
+    // function clustering(cluster){
+    //   var vectors = [];
+    //   for (let i = 0 ; i < logBook.length ; i++) {
+    //     vectors[i] = [ logBook[i]['temperature'] , logBook[i]['humidity'], logBook[i]['latitude'], logBook[i]['longitude']];
+    //   }
 
       
-      const kmeans = require('node-kmeans');
-      kmeans.clusterize(vectors, {k: cluster}, (err,res) => {
-        if (err) {
-          console.error(err);
-        }else{
-          // console.log('%o',res);
-          setClusterData(res);
-        } 
-        // console.log("cluster ", clusterData);
-        setLoading(false);
-      });
-    }
+    //   const kmeans = require('node-kmeans');
+    //   kmeans.clusterize(vectors, {k: cluster}, (err,res) => {
+    //     if (err) {
+    //       console.error(err);
+    //     }else{
+    //       // console.log('%o',res);
+    //       setClusterData(res);
+    //     } 
+    //     // console.log("cluster ", clusterData);
+    //     setLoading(false);
+    //   });
+    // }
 
     //fungsi clustering menggunakan kmeans.js
     function clusterKmeans(sumCluster){
-      let rawData = new Array();
+      let rawData = [];
 
       for (let i = 0 ; i < logBook.length ; i++) {
         rawData[i] = [ logBook[i]['temperature'] , logBook[i]['humidity'], logBook[i]['latitude'], logBook[i]['longitude']];
@@ -53,29 +52,30 @@ export default function Data() {
     }
 
 
-    function getDataFb(){
+    const getDataFb = () => {
       todoRef.on('value', (snapshot) => {
         setLoading(true);
         //   console.log(snapshot.val());
         const todos = snapshot.val();
-        const todoList = [];
+        const todoList1 = [];
         while (logBook.length > 0) {
           logBook.pop();
         } 
 
         for (let id in todos) {
-          todoList.push({ id, ...todos[id] });
+          todoList1.push({ id, ...todos[id] });
           const sameData = userList.includes(todos[id].user);
           if(!sameData){
             userList.push(todos[id].user);
           }
         }
+        todoList = todoList1;
         setTodoList(todoList);
 
         userList.forEach(function(user){
           const logUser = [];
           todoList.forEach(function(item){
-            if(item.user == user){
+            if(item.user === user){
               // console.log("user sama ", user);
               logUser.push(item);
             }
@@ -83,6 +83,7 @@ export default function Data() {
           // console.log("logUser ", logUser);
           logBook.push(logUser[logUser.length-1]);          
         });
+        setLogBook(logBook);
 
         //memanggil fungsi clustering kmeans.js
         clusterKmeans(2);

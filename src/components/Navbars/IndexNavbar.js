@@ -21,12 +21,12 @@ import React from "react";
 import classnames from "classnames";
 // reactstrap components
 import {
-  Button,
+  // Button,
   Collapse,
   NavbarBrand,
   Navbar,
-  NavItem,
-  NavLink,
+  // NavItem,
+  // NavLink,
   Nav,
   Container,
 } from "reactstrap";

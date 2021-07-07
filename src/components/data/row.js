@@ -6,12 +6,12 @@ export default function Row({ todo }) {
     const todoRef = firebase.database().ref('Log').child(todo.id);
     todoRef.remove();
   };
-  const completeTodo = () => {
-    const todoRef = firebase.database().ref('Log').child(todo.id);
-    todoRef.update({
-      complete: !todo.complete,
-    });
-  };
+  // const completeTodo = () => {
+  //   const todoRef = firebase.database().ref('Log').child(todo.id);
+  //   todoRef.update({
+  //     complete: !todo.complete,
+  //   });
+  // };
   return (
     <tr>
         <td>{todo.id}</td>

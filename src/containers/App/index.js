@@ -1,4 +1,4 @@
-import react from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
 
 //pages
@@ -11,7 +11,7 @@ import RegisterPage from "../../views/examples/RegisterPage.js";
 
 //redux
 import { Provider } from 'react-redux';
-import { store } from '../../config/redux'
+import { store } from '../../config/redux';
 
 function App(){
     return(
