@@ -85,7 +85,7 @@ export default function Data() {
         <hr/>
         <center>
           <h2><i>Static Data</i> dengan K-Means <i>Clustering Algorithm</i></h2>
-          <p>Mengelompokkan data menggunakan metode K-means Clustering dari data yang telah disiapkan menyerupai data sensor realtime.</p>
+          <p>Mengelompokkan data suhu, kelembaban, dan lokasi menggunakan metode K-means Clustering dari data yang telah disiapkan menyerupai data sensor realtime.</p>
         </center>
         <hr/>
       </div>
