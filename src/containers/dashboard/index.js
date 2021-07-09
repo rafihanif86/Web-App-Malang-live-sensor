@@ -6,7 +6,8 @@ import React from "react";
 import IndexNavbar from "../../components/Navbars/IndexNavbar.js";
 import IndexHeader from "../../components/Headers/IndexHeader.js";
 import DemoFooter from "../../components/Footers/DemoFooter.js";
-import TabelDb from "../../components/data";
+import Data from "../../components/data";
+import StaticData from "../../components/data/static";
 
 function Dashboard() {
   document.documentElement.classList.remove("nav-open");
@@ -20,7 +21,8 @@ function Dashboard() {
     <>
       <IndexNavbar />
       <IndexHeader />
-      <TabelDb />
+      <Data />
+      <StaticData />
       <DemoFooter />
     </>
   );

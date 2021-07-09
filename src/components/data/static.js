@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import firebase from '../../config/firebase';
-// import { Table, Container } from 'reactstrap';
-// import Row from './row';
 import Maps from '../maps';
 import kmeans from './kmeans';
+import staticData from './staticData.json';
+
 
 export default function Data() {
   
-    var [todoList, setTodoList] = useState();
     const [loading, setLoading] = useState(true);
-    const userList = [];
     const [logBook, setLogBook] = useState([]);
     const [clusterData, setClusterData] = useState([]);
     var mapsAdd = '';
+
+
+    if(logBook.length === 0){
+        setLogBook(staticData);
+    }
     
-    const todoRef = firebase.database().ref('Log');
 
     //fungsi clustering menggunakan node-kmeans
     // function clustering(cluster){
@@ -46,54 +47,25 @@ export default function Data() {
       }
 
       var tmp = kmeans(sumCluster, rawData);
-      // console.log('tmp ', tmp);
+      console.log('tmp ', tmp);
       setClusterData(tmp);
       setLoading(false);
     }
 
 
     const getDataFb = () => {
-      setLoading(true);
-      todoRef.on('value', (snapshot) => {
-        //   console.log(snapshot.val());
-        const todos = snapshot.val();
-        const todoList1 = [];
-        while (logBook.length > 0) {
-          logBook.pop();
-        } 
-
-        for (let id in todos) {
-          todoList1.push({ id, ...todos[id] });
-          const sameData = userList.includes(todos[id].user);
-          if(!sameData){
-            userList.push(todos[id].user);
-          }
-        }
-        todoList = todoList1;
-        setTodoList(todoList);
-
-        userList.forEach(function(user){
-          const logUser = [];
-          todoList.forEach(function(item){
-            if(item.user === user){
-              // console.log("user sama ", user);
-              logUser.push(item);
-            }
-          });
-          // console.log("logUser ", logUser);
-          logBook.push(logUser[logUser.length-1]);          
-        });
-        setLogBook(logBook);
+        setLoading(true);
 
         //memanggil fungsi clustering kmeans.js
-        clusterKmeans(2);
+        if(logBook.length !== 0){
+            clusterKmeans(2);
+        }
 
         //memanggil fungsi clustering node-kmeans
         // clustering(2);
 
         // console.log("list of user ", userList);
-        // console.log("list of Logbook ", logBook);
-      });
+        console.log("list of Logbook ", logBook);
     }
 
     useEffect(() => {
@@ -112,35 +84,14 @@ export default function Data() {
       <div>
         <hr/>
         <center>
-          <h2><i>Realtime sensors</i> dengan K-Means <i>Clustering Algorithm</i></h2>
-          <p>Mengelompokkan data menggunakan metode K-means Clustering dari data sensor realtime yang telah disebar di beberapa titik.</p>
+          <h2><i>Static Data</i> dengan K-Means <i>Clustering Algorithm</i></h2>
+          <p>Mengelompokkan data menggunakan metode K-means Clustering dari data yang telah disiapkan menyerupai data sensor realtime.</p>
         </center>
         <hr/>
       </div>
       <div>{mapsAdd}</div>
       
       <div style={{ minHeight: "800px"}}></div>
-
-      
-      {/* <Container>
-        <h2>Data Logbook</h2>
-        <Table>
-          <thead>
-              <tr>
-              <th>Key</th>
-              <th>Time</th>
-              <th>Humidity</th>
-              <th>Temp</th>
-              <th>Long, Lat</th>
-              <th>User</th>
-              <th></th>
-              </tr>
-          </thead>
-          <tbody>
-              {todoList ? todoList.map((todo, index) => <Row todo={todo} key={index} />) : <h3> Loading Data.. </h3>} 
-          </tbody>
-        </Table>
-      </Container> */}
     </div>
   );
 }

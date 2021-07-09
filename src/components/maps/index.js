@@ -7,7 +7,6 @@ const mapStyles = {
 };
   
 const coords = { lat: -7.9569336, lng: 112.6321853 };
-var logBook = [];
 var cluster = [];
 var clusterPoints = [];
 var clusterInfo = [];
@@ -38,8 +37,6 @@ export class MapContainer extends Component {
     };  
 
     render() {
-
-        logBook = [];  
         cluster = [];
         clusterPoints = [];
         clusterInfo = [];
@@ -47,11 +44,10 @@ export class MapContainer extends Component {
         centeroidInfo = [];
         
         cluster = this.props.dataCluster;
-        logBook = this.props.logBook;
 
-        console.log('cluster Maps ', cluster);
-        console.log('logBook Maps ', logBook);
-        console.log('clusterPoints Maps ', clusterPoints);
+        // console.log('cluster Maps ', cluster);
+        // console.log('logBook Maps ', logBook);
+        // console.log('clusterPoints Maps ', clusterPoints);
 
         cluster.forEach( function(cl, i) {
             centeroidPoint.push({
@@ -113,7 +109,7 @@ export class MapContainer extends Component {
                 {clusterPoints.map((point, index) => 
                     <Marker 
                         onClick={this.onMarkerClick}
-                        name={'cluster : ' + clusterInfo[index].group + ', Humidity : '  + clusterInfo[index].humidity + '%, Temperature : ' + clusterInfo[index].temperature }
+                        name={'Cluster : ' + clusterInfo[index].group + ', Humidity : '  + clusterInfo[index].humidity + '%, Temperature : ' + clusterInfo[index].temperature }
                         position={point} />)}
 
                 {centeroidPoint.map((point, index) => 
@@ -133,7 +129,7 @@ export class MapContainer extends Component {
                 {centeroidPoint.map((point, index) => 
                     <Marker 
                         onClick={this.onMarkerClick}
-                        name={'centeroid of cluster : ' + centeroidInfo[index].group + ', Humidity : '  + centeroidInfo[index].humidity + '%, Temperature : ' + centeroidInfo[index].temperature }
+                        name={'Centeroid of cluster : ' + centeroidInfo[index].group + ', Humidity : '  + centeroidInfo[index].humidity + '%, Temperature : ' + centeroidInfo[index].temperature }
                         position={point} />)}
 
                 
