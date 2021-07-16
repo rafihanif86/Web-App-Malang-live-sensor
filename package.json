@@ -12,10 +12,12 @@
     "react": "17.0.2",
     "react-datetime": "3.0.4",
     "react-dom": "17.0.2",
+    "react-geocode": "^0.2.3",
     "react-redux": "^7.2.4",
     "react-router": "5.2.0",
     "react-router-dom": "5.2.0",
     "react-scripts": "4.0.3",
+    "react-to-print": "^2.12.6",
     "reactstrap": "8.9.0",
     "redux": "^4.1.0",
     "redux-thunk": "^2.3.0"

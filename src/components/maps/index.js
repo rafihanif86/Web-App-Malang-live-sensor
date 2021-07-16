@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Map, InfoWindow, Marker, Circle, GoogleApiWrapper } from 'google-maps-react';
 
 const mapStyles = {
-    width: '100%',
-    height: '100%',
+    width: '98%',
+    height: '600px'
 };
   
 const coords = { lat: -7.9569336, lng: 112.6321853 };
@@ -83,70 +83,64 @@ export class MapContainer extends Component {
 
 
         return (
-        <>
-            <Map
-                initialCenter={coords}
-                google={this.props.google}
-                style={mapStyles}
-                zoom={13}
-                onClick={this.onMapClicked}
-                >
+                <Map
+                    initialCenter={coords}
+                    google={this.props.google}
+                    style={mapStyles}
+                    zoom={13}
+                    onClick={this.onMapClicked}
+                    >
 
-                {clusterPoints.map((point, index) => 
-                    <Circle
-                    radius={1000}
-                    center={point}
-                    // onMouseover={() => console.log('mouseover')}
-                    // onClick={() => console.log('click')}
-                    // onMouseout={() => console.log('mouseout')}
-                    strokeColor='transparent'
-                    strokeOpacity={0}
-                    strokeWeight={5}
-                    fillColor={getColor(clusterInfo[index].group)}
-                    fillOpacity={0.3}
-                />)}
+                    {clusterPoints.map((point, index) => 
+                        <Circle
+                        radius={1000}
+                        center={point}
+                        // onMouseover={() => console.log('mouseover')}
+                        // onClick={() => console.log('click')}
+                        // onMouseout={() => console.log('mouseout')}
+                        strokeColor='transparent'
+                        strokeOpacity={0}
+                        strokeWeight={5}
+                        fillColor={getColor(clusterInfo[index].group)}
+                        fillOpacity={0.3}
+                    />)}
 
-                {clusterPoints.map((point, index) => 
-                    <Marker 
-                        onClick={this.onMarkerClick}
-                        name={'Cluster : ' + clusterInfo[index].group + ', Humidity : '  + clusterInfo[index].humidity + '%, Temperature : ' + clusterInfo[index].temperature }
-                        position={point} />)}
+                    {clusterPoints.map((point, index) => 
+                        <Marker 
+                            onClick={this.onMarkerClick}
+                            name={'Marker : '+ (index + 1) + ', Cluster : ' + clusterInfo[index].group + ', Humidity : '  + clusterInfo[index].humidity + '%, Temperature : ' + clusterInfo[index].temperature +'°C'}
+                            position={point} />)}
 
-                {centeroidPoint.map((point, index) => 
-                    <Circle
-                    radius={getRadius(centeroidInfo[index].marker)}
-                    center={point}
-                    // onMouseover={() => console.log('mouseover')}
-                    // onClick={() => console.log('click')}
-                    // onMouseout={() => console.log('mouseout')}
-                    strokeColor='transparent'
-                    strokeOpacity={0}
-                    strokeWeight={5}
-                    fillColor={getColor(centeroidInfo[index].group)}
-                    fillOpacity={0.2}
-                />)}
+                    {centeroidPoint.map((point, index) => 
+                        <Circle
+                        radius={getRadius(centeroidInfo[index].marker)}
+                        center={point}
+                        // onMouseover={() => console.log('mouseover')}
+                        // onClick={() => console.log('click')}
+                        // onMouseout={() => console.log('mouseout')}
+                        strokeColor='transparent'
+                        strokeOpacity={0}
+                        strokeWeight={5}
+                        fillColor={getColor(centeroidInfo[index].group)}
+                        fillOpacity={0.2}
+                    />)}
 
-                {centeroidPoint.map((point, index) => 
-                    <Marker 
-                        onClick={this.onMarkerClick}
-                        name={'Centeroid of cluster : ' + centeroidInfo[index].group + ', Humidity : '  + centeroidInfo[index].humidity + '%, Temperature : ' + centeroidInfo[index].temperature }
-                        position={point} />)}
-
-                
-
-                
-    
-                <InfoWindow
-                marker={this.state.activeMarker}
-                visible={this.state.showingInfoWindow}>
-                    <div>
-                    <h1>{this.state.selectedPlace.name}</h1>
-                    </div>
-                </InfoWindow>
-            </Map>
-          </>
+                    {centeroidPoint.map((point, index) => 
+                        <Marker 
+                            onClick={this.onMarkerClick}
+                            name={'Centeroid of cluster : ' + centeroidInfo[index].group + ', Humidity : '  + centeroidInfo[index].humidity + '%, Temperature : ' + centeroidInfo[index].temperature + '°C, Range : ' + centeroidInfo[index].marker + ' Km' }
+                            position={point} />)}
+        
+                    <InfoWindow
+                    marker={this.state.activeMarker}
+                    visible={this.state.showingInfoWindow}>
+                        <div>
+                        <h1>{this.state.selectedPlace.name}</h1>
+                        </div>
+                    </InfoWindow>
+                </Map>
         );
       }
     }export default GoogleApiWrapper({
-        apiKey: 'AIzaSyDGArUEBa5ns09IA7nt7jP-xfNIUkToFts'
+        apiKey: 'AIzaSyDTmZnN_dROiVsELimpq_N_S6Md-xBP-iM'
     })(MapContainer);

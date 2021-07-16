@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import firebase from '../../config/firebase';
-// import { Table, Container } from 'reactstrap';
-// import Row from './row';
 import Maps from '../maps';
 import kmeans from './kmeans';
+import TableCluster from '../Table/tableCluster';
+import TableCentroid from '../Table/tableCentroid';
+import {Card, CardBody} from 'reactstrap';
 
 export default function Data() {
   
@@ -13,6 +14,9 @@ export default function Data() {
     const [logBook, setLogBook] = useState([]);
     const [clusterData, setClusterData] = useState([]);
     var mapsAdd = '';
+    var tabelCluster = '';
+    var tabelCentroid = '';
+
     
     const todoRef = firebase.database().ref('Log');
 
@@ -103,44 +107,34 @@ export default function Data() {
     if(loading){
       mapsAdd = <h1> Loading For Maps.. </h1>;
     }else{
-      mapsAdd = <Maps dataCluster={clusterData} key={'1'}/>;
-      // mapsAdd = <Maps dataCluster={clusterData} logBook={logBook} key={'1'}/>;
+      mapsAdd = <Maps dataCluster={clusterData} key={1}/>;
+      tabelCluster = <TableCluster dataCluster={clusterData} key={1}/>;
+      tabelCentroid = <TableCentroid dataCluster={clusterData} key={1}/>
     }
 
   return (
+    // <Card>
+    //   <CardBody>
+    //     <h2><i>Realtime sensors</i> dengan K-Means <i>Clustering Algorithm</i></h2>
+    //     <p>Mengelompokkan data suhu, kelembaban, dan lokasi menggunakan metode K-means Clustering dari data sensor realtime yang telah disebar di beberapa titik.</p>
+    //   </CardBody>
+    //   {mapsAdd}
+    //   <div style={{ minHeight: "600px"}}></div>
+    //   <CardBody>
+    //     <div>{tabelCentroid}</div>
+    //     <div>{tabelCluster}</div>
+    //   </CardBody>
+    // </Card>
     <div>
       <div>
         <hr/>
-        <center>
-          <h2><i>Realtime sensors</i> dengan K-Means <i>Clustering Algorithm</i></h2>
-          <p>Mengelompokkan data suhu, kelembaban, dan lokasi menggunakan metode K-means Clustering dari data sensor realtime yang telah disebar di beberapa titik.</p>
-        </center>
+        <h2><i>Static Data</i> dengan K-Means <i>Clustering Algorithm</i></h2>
+        <p>Mengelompokkan data suhu, kelembaban, dan lokasi menggunakan metode K-means Clustering dari data yang telah disiapkan menyerupai data sensor realtime.</p>     
         <hr/>
       </div>
-      <div>{mapsAdd}</div>
-      
-      <div style={{ minHeight: "800px"}}></div>
-
-      
-      {/* <Container>
-        <h2>Data Logbook</h2>
-        <Table>
-          <thead>
-              <tr>
-              <th>Key</th>
-              <th>Time</th>
-              <th>Humidity</th>
-              <th>Temp</th>
-              <th>Long, Lat</th>
-              <th>User</th>
-              <th></th>
-              </tr>
-          </thead>
-          <tbody>
-              {todoList ? todoList.map((todo, index) => <Row todo={todo} key={index} />) : <h3> Loading Data.. </h3>} 
-          </tbody>
-        </Table>
-      </Container> */}
+      <div style={{ minHeight: "600px"}}>{mapsAdd}</div>
+      <div>{tabelCentroid}</div>
+      <div>{tabelCluster}</div>
     </div>
   );
 }

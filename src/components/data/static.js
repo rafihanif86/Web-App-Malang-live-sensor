@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Maps from '../maps';
 import kmeans from './kmeans';
 import staticData from './staticData.json';
-
+import TableCluster from '../Table/tableCluster';
+import TableCentroid from '../Table/tableCentroid';
+import {Card, CardBody, CardTitle, CardSubtitle} from 'reactstrap';
 
 export default function Data() {
   
@@ -10,6 +12,8 @@ export default function Data() {
     const [logBook, setLogBook] = useState([]);
     const [clusterData, setClusterData] = useState([]);
     var mapsAdd = '';
+    var tabelCluster = '';
+    var tabelCentroid = '';
 
 
     if(logBook.length === 0){
@@ -47,7 +51,7 @@ export default function Data() {
       }
 
       var tmp = kmeans(sumCluster, rawData);
-      console.log('tmp ', tmp);
+      // console.log('tmp ', tmp);
       setClusterData(tmp);
       setLoading(false);
     }
@@ -65,7 +69,7 @@ export default function Data() {
         // clustering(2);
 
         // console.log("list of user ", userList);
-        console.log("list of Logbook ", logBook);
+        // console.log("list of Logbook ", logBook);
     }
 
     useEffect(() => {
@@ -76,22 +80,21 @@ export default function Data() {
       mapsAdd = <h1> Loading For Maps.. </h1>;
     }else{
       mapsAdd = <Maps dataCluster={clusterData} key={'1'}/>;
-      // mapsAdd = <Maps dataCluster={clusterData} logBook={logBook} key={'1'}/>;
+      tabelCluster = <TableCluster dataCluster={clusterData} key={1}/>;
+      tabelCentroid = <TableCentroid dataCluster={clusterData} key={1}/>
     }
 
   return (
     <div>
       <div>
         <hr/>
-        <center>
-          <h2><i>Static Data</i> dengan K-Means <i>Clustering Algorithm</i></h2>
-          <p>Mengelompokkan data suhu, kelembaban, dan lokasi menggunakan metode K-means Clustering dari data yang telah disiapkan menyerupai data sensor realtime.</p>
-        </center>
+        <h2><i>Static Data</i> dengan K-Means <i>Clustering Algorithm</i></h2>
+        <p>Mengelompokkan data suhu, kelembaban, dan lokasi menggunakan metode K-means Clustering dari data yang telah disiapkan menyerupai data sensor realtime.</p>     
         <hr/>
       </div>
-      <div>{mapsAdd}</div>
-      
-      <div style={{ minHeight: "800px"}}></div>
+      <div style={{ minHeight: "600px"}}>{mapsAdd}</div>
+      <div>{tabelCentroid}</div>
+      <div>{tabelCluster}</div>
     </div>
   );
 }
