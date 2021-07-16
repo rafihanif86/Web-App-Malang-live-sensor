@@ -128,8 +128,8 @@ export default function Data() {
     <div>
       <div>
         <hr/>
-        <h2><i>Static Data</i> dengan K-Means <i>Clustering Algorithm</i></h2>
-        <p>Mengelompokkan data suhu, kelembaban, dan lokasi menggunakan metode K-means Clustering dari data yang telah disiapkan menyerupai data sensor realtime.</p>     
+        <h2><i>Realtime sensors</i> dengan K-Means <i>Clustering Algorithm</i></h2>
+        <p>Mengelompokkan data suhu, kelembaban, dan lokasi menggunakan metode K-means Clustering dari data sensor realtime yang telah disebar di beberapa titik.</p>
         <hr/>
       </div>
       <div style={{ minHeight: "600px"}}>{mapsAdd}</div>
