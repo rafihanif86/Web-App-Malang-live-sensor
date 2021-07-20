@@ -1,12 +1,8 @@
 import React from "react";
-import { Container, Row, Col} from 'reactstrap';
-
-// reactstrap components
+import { Container, Row, Col } from 'reactstrap';
 
 // core components
-import IndexNavbar from "../../components/Navbars/IndexNavbar.js";
 import IndexHeader from "../../components/Headers/IndexHeader.js";
-import DemoFooter from "../../components/Footers/DemoFooter.js";
 import Data from "../../components/data";
 import StaticData from "../../components/data/static";
 
@@ -29,8 +25,7 @@ function Dashboard() {
     };
   });
   return (
-    <div style={{backgroundColor: "#f2f2f2"}}>
-      <IndexNavbar />
+    <div>
       <IndexHeader />
       <div>
         <Container>
@@ -50,7 +45,6 @@ function Dashboard() {
           </Row>
         </Container>
       </div>
-      <DemoFooter />
     </div>
   );
 }

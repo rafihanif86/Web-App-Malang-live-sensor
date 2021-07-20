@@ -69,7 +69,7 @@ function IndexNavbar() {
             data-placement="bottom"
             href="/index"
             target=""
-            title="Coded by Creative Tim"
+            title="Malang Live Sensors"
           >
             Malang Live Sensors
           </NavbarBrand>
@@ -147,7 +147,7 @@ function IndexNavbar() {
               <Button
                 className="btn-round"
                 color="success"
-                href="/login-page"
+                href="/data-preview"
                 target=""
               >
                 <i className="nc-icon nc-circle-10"></i> Login

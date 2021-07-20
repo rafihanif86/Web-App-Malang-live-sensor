@@ -1,25 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import Maps from '../maps';
+
+//components
 import kmeans from './kmeans';
-import staticData from './staticData.json';
+import Loading from '../loading';
+import Maps from '../mapsCluster';
 import TableCluster from '../Table/tableCluster';
 import TableCentroid from '../Table/tableCentroid';
-import {Card, CardBody, CardTitle, CardSubtitle} from 'reactstrap';
+
+//data json
+import staticData from './staticData.json';
 
 export default function Data() {
   
     const [loading, setLoading] = useState(true);
     const [logBook, setLogBook] = useState([]);
     const [clusterData, setClusterData] = useState([]);
+    var [arrayCluster, setArrayCluster] = useState([]);
     var mapsAdd = '';
     var tabelCluster = '';
     var tabelCentroid = '';
 
-
     if(logBook.length === 0){
         setLogBook(staticData);
     }
-    
 
     //fungsi clustering menggunakan node-kmeans
     // function clustering(cluster){
@@ -51,8 +54,19 @@ export default function Data() {
       }
 
       var tmp = kmeans(sumCluster, rawData);
-      // console.log('tmp ', tmp);
       setClusterData(tmp);
+
+      var dataCl = [];
+      for(let i = 0; i < tmp.length; i++){
+          for(let b = 0; b < tmp[i].cluster.length; b++){
+              var d = null;
+              d = tmp[i].cluster[b];
+              d.push(i)
+              dataCl.push(d);
+          }
+      }
+      setArrayCluster(dataCl);
+
       setLoading(false);
     }
 
@@ -67,9 +81,6 @@ export default function Data() {
 
         //memanggil fungsi clustering node-kmeans
         // clustering(2);
-
-        // console.log("list of user ", userList);
-        // console.log("list of Logbook ", logBook);
     }
 
     useEffect(() => {
@@ -77,10 +88,11 @@ export default function Data() {
     }, [])
 
     if(loading){
-      mapsAdd = <h1> Loading For Maps.. </h1>;
+      mapsAdd = <h1><center> Loading For Maps.. <br/><Loading /></center></h1>;
+      tabelCentroid =<h1><center>Loading For Data.. <br/><Loading /></center></h1>;
     }else{
       mapsAdd = <Maps dataCluster={clusterData} key={'1'}/>;
-      tabelCluster = <TableCluster dataCluster={clusterData} key={1}/>;
+      tabelCluster = <TableCluster dataCl={arrayCluster} realtime={false} key={1}/>;
       tabelCentroid = <TableCentroid dataCluster={clusterData} key={1}/>
     }
 
@@ -93,8 +105,11 @@ export default function Data() {
         <hr/>
       </div>
       <div style={{ minHeight: "600px"}}>{mapsAdd}</div>
-      <div>{tabelCentroid}</div>
-      <div>{tabelCluster}</div>
+      <div>
+        <div>{tabelCentroid}</div>
+        <div>{tabelCluster}</div>
+        <hr/>
+      </div>
     </div>
   );
 }

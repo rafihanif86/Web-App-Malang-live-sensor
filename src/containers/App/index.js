@@ -3,11 +3,9 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-d
 
 //pages
 import Dashboard from "../../containers/dashboard";
-import NucleoIcons from "../../views/NucleoIcons.js";
-import Login from "../login";
-import LandingPage from "../../views/examples/LandingPage.js";
-import ProfilePage from "../../views/examples/ProfilePage.js";
-import RegisterPage from "../../views/examples/RegisterPage.js";
+import DataPreview from "../dataPreview";
+import IndexNavbar from "../../components/Navbars/IndexNavbar.js";
+import DemoFooter from "../../components/Footers/DemoFooter.js";
 
 //redux
 import { Provider } from 'react-redux';
@@ -15,34 +13,19 @@ import { store } from '../../config/redux';
 
 function App(){
     return(
+        <>
+        <IndexNavbar />
         <Provider store = {store}>
             <Router>
                 <Switch>
                     <Route path="/dashboard" render={(props) => <Dashboard {...props} />} />
-                    <Route
-                        path="/nucleo-icons"
-                        render={(props) => <NucleoIcons {...props} />}
-                    />
-                    <Route
-                        path="/login-page"
-                        render={(props) => <Login {...props} />}
-                    />
-                    <Route
-                        path="/landing-page"
-                        render={(props) => <LandingPage {...props} />}
-                    />
-                    <Route
-                        path="/profile-page"
-                        render={(props) => <ProfilePage {...props} />}
-                    />
-                    <Route
-                        path="/register-page"
-                        render={(props) => <RegisterPage {...props} />}
-                    />
+                    <Route path="/data-preview/:id" render={(props) => <DataPreview {...props} />} />
                     <Redirect to="/dashboard" />
                 </Switch>
             </Router>
         </Provider>
+        <DemoFooter />
+        </>
     )
 }
 
