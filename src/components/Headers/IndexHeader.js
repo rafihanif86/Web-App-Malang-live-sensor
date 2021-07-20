@@ -1,6 +1,9 @@
 
 import React from "react";
 import { connect } from "react-redux";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { Badge } from 'reactstrap';
 
 // reactstrap components
 import { Container } from "reactstrap";
@@ -48,17 +51,10 @@ function IndexHeader(props) {
           }}
         />
         <h6 className="category category-absolute">
-          Created by Rafi Hanif Rahmadhani
-          {/* <a
-            href="https://www.creative-tim.com?ref=pkr-index-page"
-            target="_blank"
-          >
-            <img
-              alt="..."
-              className="creative-tim-logo"
-              src={require("assets/img/creative-tim-white-slim2.png").default}
-            />
-          </a> */}
+          Created by {"  "}
+          <Badge  href="https://github.com/rafihanif86" target="_blank" color="dark" size="lg">
+            <FontAwesomeIcon icon={faGithub} size="lg" /> rafihanif86
+          </Badge >
         </h6>
       </div>
     </>
