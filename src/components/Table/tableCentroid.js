@@ -11,6 +11,18 @@ export default function TabelCluster({ dataCluster }) {
             dataCT.push(d);
     }
 
+    //menghitung range cluster
+    var centeroidRange = [];
+    dataCluster.forEach( function(cl, i) {
+        var range = 0;
+        cl.cluster.forEach( function(point, j) {
+            //menghitung jarak marker ke centeroid
+            var dis = Math.sqrt((point[3] - cl.centroid[3])**2 + (point[2] - cl.centroid[2])**2);
+            if(dis >= range){range = dis;}
+        });
+        centeroidRange.push(Math.ceil(((range*0.15)+range)*100000));
+    });
+
     return (
         <div>
             <Container>
@@ -29,7 +41,7 @@ export default function TabelCluster({ dataCluster }) {
                         {dataCT ? dataCT.map((dt, index) => 
                             <tr key={index}>
                                 <td>Cluster {index + 1}</td>
-                                <td>{dt[4]} Km</td>
+                                <td>{centeroidRange[index]} m</td>
                                 <td>{dt[1]}%</td>
                                 <td>{dt[0]}&deg;C</td>
                                 <td>{dt[3]}, {dt[2]}</td>

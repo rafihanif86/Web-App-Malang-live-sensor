@@ -1,83 +1,65 @@
 [
     {
-        "humidity": 103.11726379394531,
-        "id": "-MdX1aJvGa56uOk1T0pL",
-        "latitude": 112.596201,
-        "longitude": -7.893210,
-        "temperature": 28.625,
-        "time": "2021-07-01 19:28:05",
-        "user": "2wJtWC55WSgXfHKsGFEzBhsePIJ2"
+        "humidity": 88.11726379394531,
+        "latitude": 112.608832,
+        "longitude": -7.940237,
+        "temperature": 27.7575,
+        "time": "2021-07-01 19:28:05"
     },
     {
-        "humidity": 65,
-        "id": "-Me-1B3w2mzFxSJv3Fmk",
-        "latitude": 112.61496,
-        "longitude": -7.944716,
-        "temperature": 29.200001,
-        "time": "15:14:53",
-        "user": "fMkB9L91hJXhmIrIxzIjXO0trh72"
+        "humidity": 69.80,
+        "latitude": 112.612486,
+        "longitude": -7.973378,
+        "temperature": 26.200001,
+        "time": "15:14:53"
     },
     {
-        "humidity": 49,
-        "id": "-McYV1zAQowO_GhJCDwV",
-        "latitude": 112.591316,
-        "longitude": -7.943147,
-        "temperature": 30.799999,
-        "time": "Saturday:16:00:37",
-        "user": "delOo4MeGGQyeT7H4RaXbAYH7iy2"
+        "humidity": 55.06,
+        "latitude": 112.620911,
+        "longitude": -7.973547,
+        "temperature": 29.989,
+        "time": "Saturday:16:00:37"
     },
     {
-        "humidity": 51,
-        "id": "-Me4LyMYqeKwmIjbJsDH",
+        "humidity": 62.45,
         "latitude": 112.610756,
         "longitude": -7.96457,
         "temperature": 27.700001,
-        "time": "Thursday:16:03:50",
-        "user": "eS7Rb7DyY3Q6VAItuOl3if4cqz63"
+        "time": "Thursday:16:03:50"
     },
     {
         "humidity": 58,
-        "id": "-Mcgm7hhiYzhJ5xIzbz7",
         "latitude": 112.610535,
         "longitude": -7.98617,
-        "temperature": 25.9,
-        "time": "Monday:11:16:17",
-        "user": "89SlrEjhD4gVvJgFg5bUWEulSkz1"
+        "temperature": 25.987,
+        "time": "Monday:11:16:17"
     },
     {
-        "humidity": 87.60647583007812,
-        "id": "-Me4JfoCaVqhI_yAv7lX",
-        "latitude": 112.588759,
-        "longitude": -7.915876,
-        "temperature": 27.1875,
-        "time": "Jul 8, 2021 3:53:50 PM",
-        "user": "zxskldbc41bUHz2MKcQIy4SLEIj2"
+        "humidity": 85.60647583007812,
+        "latitude": 112.630844,
+        "longitude": -7.982353,
+        "temperature": 25.3875,
+        "time": "Jul 8, 2021 3:53:50 PM"
     },
     {
-        "humidity": 61.553,
-        "id": "-Msadjjjwaiianeifnaa",
+        "humidity": 68.507,
         "latitude": 112.6472333,
         "longitude": -7.9787775,
         "temperature": 28.9,
-        "time": "Jul 8, 2021 3:53:50 PM",
-        "user": "dajksbfkasjbdfbbasuuuuweann"
+        "time": "Jul 8, 2021 3:53:50 PM"
     },
     {
-        "humidity": 84.244,
-        "id": "-Muuensdnnakaamsnd",
-        "latitude": 112.649491,
-        "longitude": -7.936503,
-        "temperature": 27.881,
-        "time": "Jul 8, 2021 3:53:50 PM",
-        "user": "ajdebbejbowoadjaknansdajdw"
+        "humidity": 80.284,
+        "latitude": 112.619202,
+        "longitude": -8.018605,
+        "temperature": 29.581,
+        "time": "Jul 8, 2021 3:53:50 PM"
     },
     {
-        "humidity": 86.43,
-        "id": "-Muuensdnnakaamsnd",
-        "latitude": 112.629091,
-        "longitude": -7.919652,
-        "temperature": 27.31,
-        "time": "Jul 8, 2021 3:53:50 PM",
-        "user": "ajdebbejbowoadjaknansdajdw"
+        "humidity": 82.43,
+        "latitude": 112.6318761,
+        "longitude": -7.971335,
+        "temperature": 27.53,
+        "time": "Jul 8, 2021 3:53:50 PM"
     }
 ]

@@ -12,6 +12,7 @@ var clusterPoints = [];
 var clusterInfo = [];
 var centeroidPoint = [];
 var centeroidInfo = [];
+var centeroidRange = [];
 
 export class MapContainer extends Component {
     state = {
@@ -43,8 +44,10 @@ export class MapContainer extends Component {
         centeroidPoint = [];
         centeroidInfo = [];
         cluster = this.props.dataCluster;
+        centeroidRange = [];
 
         cluster.forEach( function(cl, i) {
+            var range = 0;
             centeroidPoint.push({
                 lat: cl.centroid[3], lng: cl.centroid[2]
             });
@@ -63,7 +66,14 @@ export class MapContainer extends Component {
                     temperature: point[0],
                     humidity: point[1]
                 });
+
+                //menghitung jarak marker ke centeroid
+                var dis = Math.sqrt((point[3] - cl.centroid[3])**2 + (point[2] - cl.centroid[2])**2);
+                if(dis >= range){
+                    range = dis;
+                }
             });
+            centeroidRange.push(Math.ceil(((range*0.15)+range)*100000));
         });
 
         function getColor(index) {
@@ -71,10 +81,10 @@ export class MapContainer extends Component {
             return colors[index];
         }
 
-        function getRadius(index) {
-            var radius = index * 1000;
-            return radius;
-        }
+        // function getRadius(index) {
+        //     var radius = index * 500;
+        //     return radius;
+        // }
 
         return (
             <Map
@@ -86,7 +96,7 @@ export class MapContainer extends Component {
 
                 {clusterPoints.map((point, index) => 
                     <Circle
-                        radius={1000}
+                        radius={500}
                         center={point}
                         // onMouseover={() => console.log('mouseover')}
                         // onClick={() => console.log('click')}
@@ -106,7 +116,7 @@ export class MapContainer extends Component {
 
                 {centeroidPoint.map((point, index) => 
                     <Circle
-                        radius={getRadius(centeroidInfo[index].marker)}
+                        radius={centeroidRange[index]}
                         center={point}
                         // onMouseover={() => console.log('mouseover')}
                         // onClick={() => console.log('click')}
@@ -121,7 +131,7 @@ export class MapContainer extends Component {
                 {centeroidPoint.map((point, index) => 
                     <Marker 
                         onClick={this.onMarkerClick}
-                        name={'Centeroid of cluster : ' + centeroidInfo[index].group + ', Humidity : '  + centeroidInfo[index].humidity + '%, Temperature : ' + centeroidInfo[index].temperature + '°C, Range : ' + centeroidInfo[index].marker + ' Km' }
+                        name={'Centeroid of cluster : ' + centeroidInfo[index].group + ', Humidity : '  + centeroidInfo[index].humidity + '%, Temperature : ' + centeroidInfo[index].temperature + '°C, Range : ' + centeroidRange[index] + ' m' }
                         position={point} />
                 )}
 
