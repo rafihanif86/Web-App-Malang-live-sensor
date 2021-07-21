@@ -41,21 +41,16 @@ export class MapData extends Component {
             return colors[index];
         }
 
-        function getRadius(index) {
-            var radius = index * 1000;
-            return radius;
-        }
-
         return (
             <Map
                 initialCenter={coords}
                 google={this.props.google}
                 style={mapStyles}
-                zoom={15}
+                zoom={16}
                 onClick={this.onMapClicked}>
 
                 {<Circle
-                    radius={1000}
+                    radius={500}
                     center={coords}
                     // onMouseover={() => console.log('mouseover')}
                     // onClick={() => console.log('click')}
