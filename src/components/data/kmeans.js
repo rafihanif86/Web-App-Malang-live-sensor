@@ -53,6 +53,8 @@ export default function kmeans(sumCluster, rawData){
                 }
                 c.push(d);
             }
+            // console.log('dataJarak ', dataJarak);
+            // console.log('c ', c);
 
             //menentukan cluster dengan jarak terdekat
             for(let a = 0; a < c.length; a++){
@@ -69,47 +71,48 @@ export default function kmeans(sumCluster, rawData){
             // console.log('dataJarak ', dataJarak);
             // console.log('cluster K-means ' + clusterNew);
         }
-
-        //mengubah centeroid dari data rata-rata cluster
-        var centeroidMove = [];
-        for(let a = 0; a < centeroid.length; a++){
-            var avgArr = [];
-            for(let b = 0; b < centeroid[a].length; b++){
-                var sum = null;
-                var total = 0;
-                for(let d = 0; d < rawData.length; d++){
-                    if(clusterNew[d] === a){
-                    // console.log('data for avg cluster '+ a + ' ' + b + ' ' + d + ' ' , data[b]);
-                    sum += rawData[d][b];
-                    total++;
-                    }
-                }
-                var avg = sum / total;
-                // console.log('sum ' + sum);
-                // console.log('avg ' + avg);
-                avgArr.push(avg);
-            }
-            // console.log('avgArr ' + avgArr);
-            centeroidMove.push(avgArr);
-        }
-        // console.log('centeroidMove ', centeroidMove);
-        centeroid = [];
-        centeroid = centeroidMove;
-        // console.log('centeroid ', centeroid);
-
         
         if(cluster.length !== 0){
             loop = Boolean(false);
             for(let i = 0; i < cluster.length; i++){
-            if(clusterNew[i] !== cluster[i]){
-                loop = Boolean(true);
-            }
+                if(clusterNew[i] !== cluster[i]){
+                    loop = Boolean(true);
+                }
             }
             cluster = [];
             cluster = clusterNew;
         }else{
             cluster = [];
             cluster = clusterNew;
+        }
+
+        if(loop){
+            //mengubah centeroid dari data rata-rata cluster
+            var centeroidMove = [];
+            for(let a = 0; a < centeroid.length; a++){
+                var avgArr = [];
+                for(let b = 0; b < centeroid[a].length; b++){
+                    var sum = null;
+                    var total = 0;
+                    for(let d = 0; d < rawData.length; d++){
+                        if(clusterNew[d] === a){
+                        // console.log('data for avg cluster '+ a + ' ' + b + ' ' + d + ' ' , data[b]);
+                        sum += rawData[d][b];
+                        total++;
+                        }
+                    }
+                    var avg = sum / total;
+                    // console.log('sum ' + sum);
+                    // console.log('avg ' + avg);
+                    avgArr.push(avg);
+                }
+                // console.log('avgArr ' + avgArr);
+                centeroidMove.push(avgArr);
+            }
+            // console.log('centeroidMove ', centeroidMove);
+            centeroid = [];
+            centeroid = centeroidMove;
+            // console.log('centeroid ', centeroid);
         }
     }
 
