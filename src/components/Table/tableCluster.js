@@ -9,6 +9,7 @@ export default function TabelCluster({ dataCl, realtime }) {
         <div>
             <Container>
                 <h2>Marker Data</h2>
+                <p>Data suhu kelembaban dan lokasi yang dikirimkan oleh setiap device <i>Wireless Sensor Network</i> secara realtime dan telah diklompokan sesuai karakteristik menggunakan algoritma <i>K-Means Clustering</i>.</p>
                 <Table>
                     <thead>
                         <tr>
@@ -17,7 +18,7 @@ export default function TabelCluster({ dataCl, realtime }) {
                             <th>Humidity</th>
                             <th>Temp</th>
                             <th>Lat, Long</th>
-                            {realtime ? <th></th> : ''}
+                            {realtime ? <th>Chart</th> : ''}
                         </tr>
                     </thead>
                     <tbody>

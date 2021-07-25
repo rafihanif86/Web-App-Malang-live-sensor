@@ -25,9 +25,9 @@ function Dashboard() {
     };
   });
   return (
-    <div>
+    <div style={{ backgroundColor : "#f2f2f2"}}>
       <IndexHeader />
-      <div>
+      <div >
         <Container>
           <Row style={boxStyle}>
             <Col xs="2"></Col>
@@ -44,6 +44,7 @@ function Dashboard() {
             <Col xs="2"></Col>
           </Row>
         </Container>
+        <br/>
       </div>
     </div>
   );

@@ -27,6 +27,7 @@ export default function TabelCluster({ dataCluster }) {
         <div>
             <Container>
                 <h2>Centroid Data</h2>
+                <p>Hasil perhitungan dari rata-rata setiap cluster.</p>
                 <Table>
                     <thead>
                         <tr>

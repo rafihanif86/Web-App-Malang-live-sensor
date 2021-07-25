@@ -104,7 +104,7 @@ function DataPreview(){
     }
 
     return(
-        <div>
+        <div style={{ backgroundColor : "#f2f2f2"}}>
             {!loading ? 
                 <>
                     <div style={{ minHeight: "600px"}}>{mapsAdd}</div>
@@ -149,6 +149,7 @@ function DataPreview(){
                     </div>
                 </>
             : <h1><center> Loading For Data.. <br/><Loading /></center></h1>}
+            <br/>
         </div>
     );
 }
