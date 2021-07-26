@@ -64,8 +64,8 @@ function DataPreview(){
             if(sliderValue === null || sliderValue === ''){
                 sliderValue = Math.ceil(logBook.length - (logBook.length * 0.1))
                 setSliderValue(sliderValue);
-                setData();
             }
+            setData();
 
             //setting marker maps
             setPoint({ lat: logBook[logBook.length-1].longitude, lng: logBook[logBook.length-1].latitude });
