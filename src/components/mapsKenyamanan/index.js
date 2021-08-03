@@ -53,7 +53,7 @@ export class MapContainer extends Component {
                 });
 
                 clusterInfo.push({
-                    group: i + 1,
+                    group: i,
                     temperature: String(point[0]).substr(0,5),
                     humidity: String(point[1]).substr(0,5)
                 });
@@ -130,7 +130,7 @@ export class MapContainer extends Component {
                     {clusterPoints.map((point, index) => 
                         <Marker 
                             onClick={this.onMarkerClick}
-                            name={'Marker : '+ (index + 1) + ', Cluster : ' + clusterInfo[index].group + ', Humidity : '  + clusterInfo[index].humidity + '% ('+ kelembaban(clusterInfo[index].humidity)+'), Temperature : ' + clusterInfo[index].temperature +'°C ('+ suhu(clusterInfo[index].temperature) +')'}
+                            name={'Marker : '+ (index + 1) + ', Cluster : ' + (clusterInfo[index].group+1) + ', Humidity : '  + clusterInfo[index].humidity + '% ('+ kelembaban(clusterInfo[index].humidity)+'), Temperature : ' + clusterInfo[index].temperature +'°C ('+ suhu(clusterInfo[index].temperature) +')'}
                             position={point} />)}
 
                     <InfoWindow

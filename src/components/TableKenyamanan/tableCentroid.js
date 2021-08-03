@@ -37,11 +37,16 @@ export default function TabelCluster({ dataCluster }) {
 
     var parmTHI = "< 21 (Tidak Nyaman), 21-24 (Nyaman), 25-27 (Cukup Nyaman), >27 (Tidak Nyaman).";
 
+    function getColor(index) {
+        var colors = ["#00ffff", "#ffa500", "#ff00ff", "#ff0000", "#800080"];
+        return colors[index];
+    }
+
     return (
         <div>
             <Container>
-                <h2>Centroid Data</h2>
-                <p>Hasil perhitungan dari rata-rata setiap cluster. Serta Perhitungan <i>Temperature Humidity Index</i> disetiap hasil perhitungan centroid.</p>
+                <h2>Cluster Data</h2>
+                <p>Menghitungan dari rata-rata setiap cluster untuk menghasilkan <i>Centroid Cluster</i>. Serta Perhitungan <i>Temperature Humidity Index</i> disetiap hasil perhitungan centroid.</p>
                 <Table>
                     <thead>
                         <tr>
@@ -53,7 +58,7 @@ export default function TabelCluster({ dataCluster }) {
                     </thead>
                     <tbody>
                         {dataCT ? dataCT.map((dt, index) => 
-                            <tr key={index}>
+                            <tr key={index} style={{ background : getColor(index)+'80'}}> 
                                 <td>Cluster {index + 1}</td>
                                 <td>{String(0.8 * dt[0] +((dt[1]*dt[0])/500)).substr(0,5)}&deg;C 
                                     ({labelTHI(0.8 * dt[0] +((dt[1]*dt[0])/500))})</td>

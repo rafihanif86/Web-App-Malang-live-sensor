@@ -75,8 +75,6 @@ export default function Data() {
       console.log('kenyamananSuhu', kenyamananSuhu);
       console.log('kenyamananKelembaban', kenyamananKelembaban);
 
-      
-      
 
       var dataCl = [];
       for(let i = 0; i < clusteredDt.length; i++){
@@ -162,9 +160,9 @@ export default function Data() {
       <div>
         {!loading ? 
           <>
-            {tabelCentroid}
             {tabelCluster}
-            <hr/>
+            {tabelCentroid}
+            <br/>
             {mapsAdd}
             <hr/>
           </>

@@ -5,6 +5,11 @@ import { faChartBar } from '@fortawesome/free-solid-svg-icons';
 
 export default function TabelCluster({ dataCl, realtime }) {
 
+    function getColor(index) {
+        var colors = ["#00ffff", "#ffa500", "#ff00ff", "#ff0000", "#800080"];
+        return colors[index];
+    }
+
     return (
         <div>
             <Container>
@@ -23,7 +28,7 @@ export default function TabelCluster({ dataCl, realtime }) {
                     </thead>
                     <tbody>
                         {dataCl ? dataCl.map((dt, index) => 
-                            <tr key={index}>
+                            <tr key={index} style={{ background : getColor(dt[4])+'80'}}>
                                 <td>{index + 1}</td>
                                 <td>Cluster {dt[4] + 1}</td>
                                 <td>{String(dt[1]).substr(0,5)}%</td>

@@ -23,10 +23,15 @@ export default function TabelCluster({ dataCluster }) {
         centeroidRange.push(Math.ceil(((range*0.15)+range)*100000));
     });
 
+    function getColor(index) {
+        var colors = ["#00ffff", "#ffa500", "#ff00ff", "#ff0000", "#800080"];
+        return colors[index];
+    }
+
     return (
         <div>
             <Container>
-                <h2>Centroid Data</h2>
+                <h2>Cluster Data</h2>
                 <p>Hasil perhitungan dari rata-rata setiap cluster.</p>
                 <Table>
                     <thead>
@@ -34,13 +39,13 @@ export default function TabelCluster({ dataCluster }) {
                             <th>Centroid of</th>
                             <th>Cluster Range</th>
                             <th>Humidity</th>
-                            <th>Temp</th>
+                            <th>Temperature</th>
                             <th>Lat, Long</th>
                         </tr>
                     </thead>
                     <tbody>
                         {dataCT ? dataCT.map((dt, index) => 
-                            <tr key={index}>
+                            <tr key={index} style={{ background : getColor(index)+'80'}}>
                                 <td>Cluster {index + 1}</td>
                                 <td>{centeroidRange[index]} m</td>
                                 <td>{String(dt[1]).substr(0,5)}%</td>

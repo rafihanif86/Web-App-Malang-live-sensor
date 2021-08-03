@@ -134,9 +134,11 @@ export default function Data() {
       <div>
         {!loading ? 
           <>
-            <div style={{ minHeight: "600px"}}>{mapsAdd}</div>
-            {tabelCentroid}
             {tabelCluster}
+            {tabelCentroid}
+            <br/>
+            <div style={{ minHeight: "600px"}}>{mapsAdd}</div>
+            <hr/>
           </>
           : <h1><center> Loading For Data.. <br/><Loading /><br/></center></h1>}
       </div>

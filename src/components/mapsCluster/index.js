@@ -64,7 +64,7 @@ export class MapContainer extends Component {
                 lat: cl.centroid[3], lng: cl.centroid[2]
             });
             centeroidInfo.push({
-                group: i + 1,
+                group: i,
                 temperature: cl.centroid[0],
                 humidity: cl.centroid[1],
                 marker: cl.cluster.length
@@ -74,7 +74,7 @@ export class MapContainer extends Component {
                     lat: point[3], lng: point[2]
                 });
                 clusterInfo.push({
-                    group: i + 1,
+                    group: i,
                     temperature: point[0],
                     humidity: point[1]
                 });
@@ -133,7 +133,7 @@ export class MapContainer extends Component {
                     {clusterPoints.map((point, index) => 
                         <Marker 
                             onClick={this.onMarkerClick}
-                            name={'Marker : '+ (index + 1) + ', Cluster : ' + clusterInfo[index].group + ', Humidity : '  + clusterInfo[index].humidity + '%, Temperature : ' + clusterInfo[index].temperature +'°C'}
+                            name={'Marker : '+ (index + 1) + ', Cluster : ' + (clusterInfo[index].group+1) + ', Humidity : '  + clusterInfo[index].humidity + '%, Temperature : ' + clusterInfo[index].temperature +'°C'}
                             position={point} />)}
 
                     {centeroidPoint.map((point, index) => 
@@ -153,7 +153,7 @@ export class MapContainer extends Component {
                     {centeroidPoint.map((point, index) => 
                         <Marker 
                             onClick={this.onMarkerClick}
-                            name={'Centeroid of cluster : ' + centeroidInfo[index].group + ', Humidity : '  + centeroidInfo[index].humidity + '%, Temperature : ' + centeroidInfo[index].temperature + '°C, Range : ' + centeroidRange[index] + ' m' }
+                            name={'Centeroid of cluster : ' + (centeroidInfo[index].group+1) + ', Humidity : '  + centeroidInfo[index].humidity + '%, Temperature : ' + centeroidInfo[index].temperature + '°C, Range : ' + centeroidRange[index] + ' m' }
                             position={point} />
                     )}
 
