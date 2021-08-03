@@ -20,8 +20,8 @@ const boxStyle = {
 
 function DataPreview(){
 
-    var [todoList, setTodoList] = useState();
     const [loading, setLoading] = useState(true);
+    var [todoList, setTodoList] = useState();
     var [logBook, setLogBook] = useState([]);
     var [point, setPoint] = useState();
     var mapsAdd = "";

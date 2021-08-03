@@ -3,7 +3,6 @@ import { Map, InfoWindow, Marker, Circle, GoogleApiWrapper } from 'google-maps-r
 
 import Loading from '../loading';
 
-
 const mapStyles = {
     width: '98%',
     height: '600px'
@@ -13,11 +12,6 @@ var coords = false;
 var cluster = [];
 var clusterPoints = [];
 var clusterInfo = [];
-var centeroidPoint = [];
-var centeroidInfo = [];
-var centeroidRange = [];
-var centroidLat = [];
-var centroidLng = [];
 
 export class MapContainer extends Component {
     state = {
@@ -46,58 +40,35 @@ export class MapContainer extends Component {
         cluster = [];
         clusterPoints = [];
         clusterInfo = [];
-        centeroidPoint = [];
-        centeroidInfo = [];
         cluster = this.props.dataCluster;
-        centeroidRange = [];
-        centroidLat = [];
-        centroidLng = [];
 
 
         console.log('cluster', cluster);
         
         cluster.forEach( function(cl, i) {
             var range = 0;
-            centroidLat.push(cl.centroid[3]);
-            centroidLng.push(cl.centroid[2]);
-            centeroidPoint.push({
-                lat: cl.centroid[3], lng: cl.centroid[2]
-            });
-            centeroidInfo.push({
-                group: i + 1,
-                temperature: cl.centroid[0],
-                humidity: cl.centroid[1],
-                marker: cl.cluster.length
-            });
             cl.cluster.forEach( function(point, j) {
                 clusterPoints.push({
                     lat: point[3], lng: point[2]
                 });
+
                 clusterInfo.push({
                     group: i + 1,
-                    temperature: point[0],
-                    humidity: point[1]
+                    temperature: String(point[0]).substr(0,5),
+                    humidity: String(point[1]).substr(0,5)
                 });
-
-                //menghitung jarak marker ke centeroid
-                var dis = Math.sqrt((point[3] - cl.centroid[3])**2 + (point[2] - cl.centroid[2])**2);
-                if(dis >= range){
-                    range = dis;
-                }
             });
-            centeroidRange.push(Math.ceil(((range*0.15)+range)*100000));
         });
 
+        console.log('clusterPoints ', clusterPoints);
+        
 
         //membuat coord dinamis
         var sumLng = 0;
-        centroidLng.map((dt) => {sumLng += dt});
-        var avgLng = sumLng / centroidLng.length;
-
         var sumLat = 0;
-        centroidLat.map((dt) => {sumLat += dt});
-        var avgLat = sumLat / centroidLat.length;
-        
+        clusterPoints.map((dt) => {sumLng += dt.lng; sumLat += dt.lat;});
+        var avgLng = sumLng / clusterPoints.length;
+        var avgLat = sumLat / clusterPoints.length;
         coords = { lat: avgLat, lng: avgLng };
 
         function getColor(index) {
@@ -105,8 +76,34 @@ export class MapContainer extends Component {
             return colors[index];
         }
 
+        function suhu(temp){
+            var label = null;
+            if(temp < 21){
+                label = 'Tidak Nyaman';
+            }else if(temp >= 21 && temp <= 24){
+                label = 'Nyaman';
+            }else if(temp >= 25 && temp <= 27){
+                label = 'Sebagian Nyaman';
+            }else{
+                label = 'Tidak Nyaman';
+            }
+            return label;
+        }
+
+        function kelembaban(hum){
+            var label = null;
+            if(hum < 45){
+                label = 'Terlalu Kering';
+            }else if(hum >= 45 && hum <= 65){
+                label = 'Ideal';
+            }else{
+                label = 'Terlalu Lembab';
+            }
+            return label
+        }
+
         return (
-            <div>
+            <div style={{ minHeight: "600px", maxWidth:'98%'}}>
             {coords ?   
                 <>
                 <Map
@@ -133,29 +130,8 @@ export class MapContainer extends Component {
                     {clusterPoints.map((point, index) => 
                         <Marker 
                             onClick={this.onMarkerClick}
-                            name={'Marker : '+ (index + 1) + ', Cluster : ' + clusterInfo[index].group + ', Humidity : '  + clusterInfo[index].humidity + '%, Temperature : ' + clusterInfo[index].temperature +'°C'}
+                            name={'Marker : '+ (index + 1) + ', Cluster : ' + clusterInfo[index].group + ', Humidity : '  + clusterInfo[index].humidity + '% ('+ kelembaban(clusterInfo[index].humidity)+'), Temperature : ' + clusterInfo[index].temperature +'°C ('+ suhu(clusterInfo[index].temperature) +')'}
                             position={point} />)}
-
-                    {centeroidPoint.map((point, index) => 
-                        <Circle
-                            radius={centeroidRange[index]}
-                            center={point}
-                            // onMouseover={() => console.log('mouseover')}
-                            // onClick={() => console.log('click')}
-                            // onMouseout={() => console.log('mouseout')}
-                            strokeColor='transparent'
-                            strokeOpacity={0}
-                            strokeWeight={5}
-                            fillColor={getColor(centeroidInfo[index].group)}
-                            fillOpacity={0.2}
-                        />)}
-
-                    {centeroidPoint.map((point, index) => 
-                        <Marker 
-                            onClick={this.onMarkerClick}
-                            name={'Centeroid of cluster : ' + centeroidInfo[index].group + ', Humidity : '  + centeroidInfo[index].humidity + '%, Temperature : ' + centeroidInfo[index].temperature + '°C, Range : ' + centeroidRange[index] + ' m' }
-                            position={point} />
-                    )}
 
                     <InfoWindow
                         marker={this.state.activeMarker}

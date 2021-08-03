@@ -5,7 +5,7 @@ import { Row, Container, Badge } from "reactstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
-function DemoFooter() {
+function Footer() {
   return (
     <footer className="footer footer-black footer-white">
       <Container>
@@ -53,4 +53,4 @@ function DemoFooter() {
   );
 }
 
-export default DemoFooter;
+export default Footer;

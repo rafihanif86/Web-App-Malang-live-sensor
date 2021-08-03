@@ -74,10 +74,13 @@ export default function Data() {
       todoRef.on('value', (snapshot) => {
         const todos = snapshot.val();
         const todoList1 = [];
+
+        //menghapus isi logbook
         while (logBook.length > 0) {
           logBook.pop();
         } 
 
+        //merubah data dari objek menjadi array objek dan mencari list user
         for (let id in todos) {
           todoList1.push({ id, ...todos[id] });
           const sameData = userList.includes(todos[id].user);
@@ -88,6 +91,7 @@ export default function Data() {
         todoList = todoList1;
         setTodoList(todoList);
 
+        //mencari data logbook terbaru dari setiap user
         userList.forEach(function(user){
           const logUser = [];
           todoList.forEach(function(item){
@@ -123,19 +127,16 @@ export default function Data() {
   return (
     <div>
       <div>
-        <hr/>
-        <h2><i>Realtime sensors</i> dengan K-Means <i>Clustering Algorithm</i></h2>
+        <h2>Pengelompokan Karakteristik Berdasarkan Lokasi, Suhu dan Kelembaban</h2>
         <p>Mengelompokkan data suhu, kelembaban, dan lokasi menggunakan metode K-means Clustering dari data sensor realtime yang telah disebar di beberapa titik.</p>
         <hr/>
       </div>
       <div>
         {!loading ? 
           <>
+            <div style={{ minHeight: "600px"}}>{mapsAdd}</div>
             {tabelCentroid}
             {tabelCluster}
-            <hr/>
-            <div style={{ minHeight: "600px"}}>{mapsAdd}</div>
-            <hr/>
           </>
           : <h1><center> Loading For Data.. <br/><Loading /><br/></center></h1>}
       </div>

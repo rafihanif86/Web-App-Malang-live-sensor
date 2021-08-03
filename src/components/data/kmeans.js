@@ -6,6 +6,9 @@ export default function kmeans(sumCluster, rawData){
     var loop = Boolean(true);
     var arrCluster = [];
 
+
+    // console.log('rawdata kmeans',rawData);
+    
     // menentukan centeroid awal
     let i = 0; 
     while(i < sumCluster){
@@ -58,10 +61,10 @@ export default function kmeans(sumCluster, rawData){
 
             //menentukan cluster dengan jarak terdekat
             for(let a = 0; a < c.length; a++){
-            var min = Math.min.apply(Math, c[a]);
+                var min = Math.min.apply(Math, c[a]);
                 for(let b = 0; b < c[a].length; b++){
                     if(c[a][b] === min){
-                    clusterNew.push(b);
+                        clusterNew.push(b);
                     }
                 }
             }
@@ -96,23 +99,19 @@ export default function kmeans(sumCluster, rawData){
                     var total = 0;
                     for(let d = 0; d < rawData.length; d++){
                         if(clusterNew[d] === a){
-                        // console.log('data for avg cluster '+ a + ' ' + b + ' ' + d + ' ' , data[b]);
                         sum += rawData[d][b];
                         total++;
                         }
                     }
                     var avg = sum / total;
-                    // console.log('sum ' + sum);
-                    // console.log('avg ' + avg);
                     avgArr.push(avg);
                 }
-                // console.log('avgArr ' + avgArr);
                 centeroidMove.push(avgArr);
             }
-            // console.log('centeroidMove ', centeroidMove);
             centeroid = [];
             centeroid = centeroidMove;
-            // console.log('centeroid ', centeroid);
+            // console.log('centeroid',centeroid);
+            
         }
     }
 
@@ -134,9 +133,11 @@ export default function kmeans(sumCluster, rawData){
                 cluster : dataCl, 
                 clusterInd : index
             });
+            
+            
         }
+        // console.log('arrCluster',arrCluster);
     }
 
-    //   console.log('arrCluster ', arrCluster);
     return arrCluster;
 }

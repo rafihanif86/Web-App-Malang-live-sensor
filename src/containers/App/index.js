@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-d
 import Dashboard from "../../containers/dashboard";
 import DataPreview from "../dataPreview";
 import IndexNavbar from "../../components/Navbars/IndexNavbar.js";
-import DemoFooter from "../../components/Footers/DemoFooter.js";
+import Footer from "../../components/Footers/index.js";
 
 //redux
 import { Provider } from 'react-redux';
@@ -24,7 +24,7 @@ function App(){
                 </Switch>
             </Router>
         </Provider>
-        <DemoFooter />
+        <Footer />
         </>
     )
 }
