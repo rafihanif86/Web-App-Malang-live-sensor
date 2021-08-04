@@ -65,8 +65,8 @@ export class MapContainer extends Component {
             });
             centeroidInfo.push({
                 group: i,
-                temperature: cl.centroid[0],
-                humidity: cl.centroid[1],
+                temperature: String(cl.centroid[0]).substr(0,5),
+                humidity: String(cl.centroid[1]).substr(0,5),
                 marker: cl.cluster.length
             });
             cl.cluster.forEach( function(point, j) {
@@ -75,8 +75,8 @@ export class MapContainer extends Component {
                 });
                 clusterInfo.push({
                     group: i,
-                    temperature: point[0],
-                    humidity: point[1]
+                    temperature: String(point[0]).substr(0,5),
+                    humidity: String(point[1]).substr(0,5)
                 });
 
                 //menghitung jarak marker ke centeroid

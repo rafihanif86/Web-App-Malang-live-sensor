@@ -64,7 +64,7 @@ export class MapData extends Component {
 
                 {<Marker 
                     onClick={this.onMarkerClick}
-                    name={'Sensor ID : '+ sensorId + ', Latitude : ' + coords.lat +  ', Longitude : ' + coords.lng}
+                    name={'Sensor ID : '+ sensorId + ', (' + String(coords.lat).substr(0,9) +  ' LS, ' + String(coords.lng).substr(0,10) +' BT) THI : ' + this.props.thi}
                     position={coords} 
                 />}
 

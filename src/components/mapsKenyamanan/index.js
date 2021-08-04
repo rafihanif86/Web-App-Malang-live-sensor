@@ -41,9 +41,6 @@ export class MapContainer extends Component {
         clusterPoints = [];
         clusterInfo = [];
         cluster = this.props.dataCluster;
-
-
-        console.log('cluster', cluster);
         
         cluster.forEach( function(cl, i) {
             var range = 0;
@@ -58,10 +55,7 @@ export class MapContainer extends Component {
                     humidity: String(point[1]).substr(0,5)
                 });
             });
-        });
-
-        console.log('clusterPoints ', clusterPoints);
-        
+        });        
 
         //membuat coord dinamis
         var sumLng = 0;

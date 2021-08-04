@@ -130,7 +130,7 @@ export default function Data() {
         setLogBook(logBook);
 
         //memanggil fungsi clustering kmeans.js
-        clusterKmeans(2);
+        clusterKmeans(3);
 
         //memanggil fungsi clustering node-kmeans
         // clustering(2);

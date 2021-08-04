@@ -29,7 +29,7 @@ export default class Chart extends React.Component {
           options={{
             title:{
               display:true,
-              text:'Average Rainfall per month',
+              text: this.props.chartName,
               fontSize:20
             },
             legend:{
