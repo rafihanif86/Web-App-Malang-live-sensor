@@ -205,8 +205,8 @@ function DataPreview(){
                                     <Container className="themed-container" style={boxStyle}>
                                         <TimeCard 
                                             label = {'Pagi'} 
-                                            kelembaban = {dtTime.indexOf('Pagi')+1 ? String(dataRata[dtTime.indexOf('Pagi')].data[1]).substr(0,5) + '%': "-"}
-                                            suhu = {dtTime.indexOf('Pagi')+1 ? String(dataRata[dtTime.indexOf('Pagi')].data[0]).substr(0,5) + '°C': "-"}
+                                            kelembaban = {dtTime.indexOf('Pagi')+1 ? String(dataRata[dtTime.indexOf('Pagi')].data[1]).substr(0,4) + '%': "-"}
+                                            suhu = {dtTime.indexOf('Pagi')+1 ? String(dataRata[dtTime.indexOf('Pagi')].data[0]).substr(0,4) + '°C': "-"}
                                             thi = {dtTime.indexOf('Pagi')+1 ? labelTHI(0.8 * dataRata[dtTime.indexOf('Pagi')].data[0] + ((dataRata[dtTime.indexOf('Pagi')].data[1]*dataRata[dtTime.indexOf('Pagi')].data[0])/500)): "-"}
                                         />
                                     </Container>
@@ -215,8 +215,8 @@ function DataPreview(){
                                     <Container className="themed-container" style={boxStyle}>
                                         <TimeCard 
                                             label = {'Siang'} 
-                                            kelembaban = {dtTime.indexOf('Siang')+1 ? String(dataRata[dtTime.indexOf('Siang')].data[1]).substr(0,5) + '%': "-"}
-                                            suhu = {dtTime.indexOf('Siang')+1 ? String(dataRata[dtTime.indexOf('Siang')].data[0]).substr(0,5) + '°C': "-"}
+                                            kelembaban = {dtTime.indexOf('Siang')+1 ? String(dataRata[dtTime.indexOf('Siang')].data[1]).substr(0,4) + '%': "-"}
+                                            suhu = {dtTime.indexOf('Siang')+1 ? String(dataRata[dtTime.indexOf('Siang')].data[0]).substr(0,4) + '°C': "-"}
                                             thi = {dtTime.indexOf('Siang')+1 ? labelTHI(0.8 * dataRata[dtTime.indexOf('Siang')].data[0] + ((dataRata[dtTime.indexOf('Siang')].data[1]*dataRata[dtTime.indexOf('Siang')].data[0])/500)): "-"}
                                         />
                                     </Container>
@@ -225,8 +225,8 @@ function DataPreview(){
                                     <Container className="themed-container" style={boxStyle}>
                                         <TimeCard 
                                             label = {'Sore'} 
-                                            kelembaban = {dtTime.indexOf('Sore')+1 ? String(dataRata[dtTime.indexOf('Sore')].data[1]).substr(0,5) + '%': "-"}
-                                            suhu = {dtTime.indexOf('Sore')+1 ? String(dataRata[dtTime.indexOf('Sore')].data[0]).substr(0,5) + '°C': "-"}
+                                            kelembaban = {dtTime.indexOf('Sore')+1 ? String(dataRata[dtTime.indexOf('Sore')].data[1]).substr(0,4) + '%': "-"}
+                                            suhu = {dtTime.indexOf('Sore')+1 ? String(dataRata[dtTime.indexOf('Sore')].data[0]).substr(0,4) + '°C': "-"}
                                             thi = {dtTime.indexOf('Sore')+1 ? labelTHI(0.8 * dataRata[dtTime.indexOf('Sore')].data[0] + ((dataRata[dtTime.indexOf('Sore')].data[1]*dataRata[dtTime.indexOf('Sore')].data[0])/500)): "-"}
                                         />
                                     </Container>
@@ -235,8 +235,8 @@ function DataPreview(){
                                     <Container className="themed-container" style={boxStyle}>
                                         <TimeCard 
                                             label = {'Malam'} 
-                                            kelembaban = {dtTime.indexOf('Malam')+1 ? String(dataRata[dtTime.indexOf('Malam')].data[1]).substr(0,5) + '%': "-"}
-                                            suhu = {dtTime.indexOf('Malam')+1 ? String(dataRata[dtTime.indexOf('Malam')].data[0]).substr(0,5) + '°C': "-"}
+                                            kelembaban = {dtTime.indexOf('Malam')+1 ? String(dataRata[dtTime.indexOf('Malam')].data[1]).substr(0,4) + '%': "-"}
+                                            suhu = {dtTime.indexOf('Malam')+1 ? String(dataRata[dtTime.indexOf('Malam')].data[0]).substr(0,4) + '°C': "-"}
                                             thi = {dtTime.indexOf('Malam')+1 ? labelTHI(0.8 * dataRata[dtTime.indexOf('Malam')].data[0] + ((dataRata[dtTime.indexOf('Malam')].data[1]*dataRata[dtTime.indexOf('Malam')].data[0])/500)): "-"}
                                         />
                                     </Container>
