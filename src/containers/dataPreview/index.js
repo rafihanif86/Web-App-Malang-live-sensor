@@ -7,6 +7,8 @@ import { Container, Row, Col, CustomInput, Form, FormGroup, Label} from 'reactst
 import MapData from "../../components/mapsData";
 import Chart from "../../components/chart";
 import Loading from '../../components/loading';
+import TimeCard from '../../components/timeCard';
+
 
 const boxStyle = {
     display: "block", 
@@ -31,6 +33,8 @@ function DataPreview(){
     var [thi, setThi] = useState([]);
     var [humidity, setHumidity] = useState([]);
     var [label, setlabel] = useState([]);
+    var [dataRata, setDataRata] = useState([]);
+    var [dtTime,setDtTime] = useState([]);
 
     //mengambil id link
     let id  = useParams();
@@ -68,6 +72,7 @@ function DataPreview(){
                 setSliderValue(sliderValue);
             }
             setData();
+            dataOnHour();
 
             //setting marker maps
             setPoint({ lat: logBook[logBook.length-1].longitude, lng: logBook[logBook.length-1].latitude });
@@ -75,6 +80,72 @@ function DataPreview(){
             setLoading(false);
         });
     }
+
+    // console.log('logbook ', logBook);
+
+    function dataOnHour(){
+        let sumHum = 0;
+        let sumTemp = 0;
+        let count = 0;
+        var ket = '';
+
+        function setDataHour(keterangan){
+            var hum = sumHum/count;
+            var temp = sumTemp/count;
+            const sameData = dtTime.includes(keterangan);
+            if(!sameData){
+                dtTime.push(keterangan);
+                dataRata.push({ket:keterangan, data:[temp,hum]});
+            }
+        }
+
+        function setCount(hum,temp){
+            sumHum += hum;
+            sumTemp += temp;
+            count++;
+        }
+
+        for(let i = logBook.length-1 ; i >= 0; i--){
+            var splitDate = logBook[i].time.split(/\s+/);
+            if(splitDate[1] >= "06:00:00" && splitDate[1] < "12:00:00"){
+                if(ket === '' || ket === 'Pagi'){
+                    ket = 'Pagi';
+                    setCount(logBook[i].humidity,logBook[i].temperature);
+                }else{
+                    setDataHour(ket);
+                    ket='Pagi';
+                }
+            }else if(splitDate[1] >= "12:00:00" && splitDate[1] < "15:00:00"){
+                if(ket === '' || ket === 'Siang'){
+                    ket = 'Siang';
+                    setCount(logBook[i].humidity,logBook[i].temperature);
+                }else{
+                    setDataHour(ket);
+                    ket='Siang';
+                }
+            }else if(splitDate[1] >= "15:00:00" && splitDate[1] < "18:00:00"){
+                if(ket === '' || ket === 'Sore'){
+                    ket = 'Sore';
+                    setCount(logBook[i].humidity,logBook[i].temperature);
+                }else{
+                    setDataHour(ket);
+                    ket='Sore';
+                }
+            }else{
+                if(ket === '' || ket === 'Malam'){
+                    ket = 'Malam';
+                    setCount(logBook[i].humidity,logBook[i].temperature);
+                }else{
+                    setDataHour(ket);
+                    ket='Malam';
+                }
+            }
+        }
+        setDataRata(dataRata);
+        setDtTime(dtTime);
+    }
+    
+    
 
     //set array data for chart
     function setData(){
@@ -128,6 +199,50 @@ function DataPreview(){
                 <>
                     <div style={{ minHeight: "600px"}}>{mapsAdd}</div>
                     <div>
+                        <Container>
+                            <Row>
+                                <Col>
+                                    <Container className="themed-container" style={boxStyle}>
+                                        <TimeCard 
+                                            label = {'Pagi'} 
+                                            kelembaban = {dtTime.indexOf('Pagi')+1 ? String(dataRata[dtTime.indexOf('Pagi')].data[1]).substr(0,5) + '%': "-"}
+                                            suhu = {dtTime.indexOf('Pagi')+1 ? String(dataRata[dtTime.indexOf('Pagi')].data[0]).substr(0,5) + '°C': "-"}
+                                            thi = {dtTime.indexOf('Pagi')+1 ? labelTHI(0.8 * dataRata[dtTime.indexOf('Pagi')].data[0] + ((dataRata[dtTime.indexOf('Pagi')].data[1]*dataRata[dtTime.indexOf('Pagi')].data[0])/500)): "-"}
+                                        />
+                                    </Container>
+                                </Col>
+                                <Col>
+                                    <Container className="themed-container" style={boxStyle}>
+                                        <TimeCard 
+                                            label = {'Siang'} 
+                                            kelembaban = {dtTime.indexOf('Siang')+1 ? String(dataRata[dtTime.indexOf('Siang')].data[1]).substr(0,5) + '%': "-"}
+                                            suhu = {dtTime.indexOf('Siang')+1 ? String(dataRata[dtTime.indexOf('Siang')].data[0]).substr(0,5) + '°C': "-"}
+                                            thi = {dtTime.indexOf('Siang')+1 ? labelTHI(0.8 * dataRata[dtTime.indexOf('Siang')].data[0] + ((dataRata[dtTime.indexOf('Siang')].data[1]*dataRata[dtTime.indexOf('Siang')].data[0])/500)): "-"}
+                                        />
+                                    </Container>
+                                </Col>
+                                <Col>
+                                    <Container className="themed-container" style={boxStyle}>
+                                        <TimeCard 
+                                            label = {'Sore'} 
+                                            kelembaban = {dtTime.indexOf('Sore')+1 ? String(dataRata[dtTime.indexOf('Sore')].data[1]).substr(0,5) + '%': "-"}
+                                            suhu = {dtTime.indexOf('Sore')+1 ? String(dataRata[dtTime.indexOf('Sore')].data[0]).substr(0,5) + '°C': "-"}
+                                            thi = {dtTime.indexOf('Sore')+1 ? labelTHI(0.8 * dataRata[dtTime.indexOf('Sore')].data[0] + ((dataRata[dtTime.indexOf('Sore')].data[1]*dataRata[dtTime.indexOf('Sore')].data[0])/500)): "-"}
+                                        />
+                                    </Container>
+                                </Col>
+                                <Col>
+                                    <Container className="themed-container" style={boxStyle}>
+                                        <TimeCard 
+                                            label = {'Malam'} 
+                                            kelembaban = {dtTime.indexOf('Malam')+1 ? String(dataRata[dtTime.indexOf('Malam')].data[1]).substr(0,5) + '%': "-"}
+                                            suhu = {dtTime.indexOf('Malam')+1 ? String(dataRata[dtTime.indexOf('Malam')].data[0]).substr(0,5) + '°C': "-"}
+                                            thi = {dtTime.indexOf('Malam')+1 ? labelTHI(0.8 * dataRata[dtTime.indexOf('Malam')].data[0] + ((dataRata[dtTime.indexOf('Malam')].data[1]*dataRata[dtTime.indexOf('Malam')].data[0])/500)): "-"}
+                                        />
+                                    </Container>
+                                </Col>
+                            </Row>
+                        </Container>
                         <Container className="themed-container" style={boxStyle}>
                             <Form>
                                 <FormGroup>
