@@ -81,7 +81,7 @@ function DataPreview(){
         });
     }
 
-    // console.log('logbook ', logBook);
+    console.log('logbook ', logBook);
 
     function dataOnHour(){
         let sumHum = 0;
